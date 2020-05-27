@@ -1,17 +1,17 @@
-import Table from '../packages/table'
-import Report from '../packages/report'
-import Dialog from '../packages/dialog'
-import Form from '../packages/form'
-import FormDialog from '../packages/formDialog'
-import Tree from '../packages/tree'
+import HatechTable from '../packages/table'
+import HatechReport from '../packages/report'
+import HatechDialog from '../packages/dialog'
+import HatechForm from '../packages/form'
+import HatechFormDialog from '../packages/formDialog'
+import HatechTree from '../packages/tree'
 
 const components = [
-  Table,
-  Report,
-  Dialog,
-  Form,
-  FormDialog,
-  Tree
+  HatechTable,
+  HatechReport,
+  HatechDialog,
+  HatechForm,
+  HatechFormDialog,
+  HatechTree
 ]
 
 const install = function (Vue, opt = {}) {
@@ -23,10 +23,10 @@ const install = function (Vue, opt = {}) {
 export default {
   version: '0.1.0',
   install,
-  Table,
-  Report,
-  Dialog,
-  Form,
-  FormDialog,
-  Tree
+  HatechTable,
+  HatechReport,
+  HatechDialog,
+  HatechForm,
+  HatechFormDialog,
+  HatechTree
 }

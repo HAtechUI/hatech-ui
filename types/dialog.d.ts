@@ -1,5 +1,5 @@
 import { HatechUIComponent } from './componet'
 
-export declare class HaDialog extends HatechUIComponent {
+export declare class HatechDialog extends HatechUIComponent {
   
 }
