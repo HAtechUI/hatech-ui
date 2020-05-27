@@ -1,6 +1,6 @@
 {
   "name": "hatech-vue-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue.js ui of Hatech",
   "main": "./src/index.js",
   "scripts": {
@@ -9,6 +9,14 @@
   "keywords": [
     "hatech"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiwh77/hatech-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiwh77/hatech-ui/issues"
+  },
+  "homepage": "https://github.com/kiwh77/hatech-ui#readme",
   "author": "kiwh77@126.com",
   "license": "ISC",
   "dependencies": {
