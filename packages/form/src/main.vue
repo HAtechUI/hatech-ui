@@ -352,7 +352,7 @@ const defaultConfig = {
   ]
 };
 export default {
-  name: 'HAForm',
+  name: 'HatechForm',
   props: {
     loading: {
       type: Boolean,

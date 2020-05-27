@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'HAReport',
+  name: 'HatechReport',
   props: {
     report: {
       type: Object,

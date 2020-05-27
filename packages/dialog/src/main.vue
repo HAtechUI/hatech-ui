@@ -54,7 +54,7 @@ const defaultConfig = {
   ]
 }
 export default {
-  name: 'HADialog',
+  name: 'HatechDialog',
   props: {
     title: String,
     config: {

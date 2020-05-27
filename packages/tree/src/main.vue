@@ -82,7 +82,7 @@ const defaultConfig = {
 }
 
 export default {
-  name: 'HATree',
+  name: 'HatechTree',
   props: {
     data: {
       type: Array,

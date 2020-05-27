@@ -377,7 +377,7 @@ const defaultConfig = {
   ]
 };
 export default {
-  name: 'HAFormDialog',
+  name: 'HatechFormDialog',
   props: {
     loading: {
       type: Boolean,
