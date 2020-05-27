@@ -1,2 +1,0 @@
-# hatech-ui
-Hatech UI
