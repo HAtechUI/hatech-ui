@@ -1,5 +1,5 @@
-export * from './hatech-ui'
+export * from './hatech'
 
-import * as HatechUI from './hatech-ui'
+import * as HatechUI from './hatech'
 
 export default HatechUI

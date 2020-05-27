@@ -1,17 +1,17 @@
 import Vue from 'vue'
 
-import { HATable } from './table'
-import { HAReport } from './report'
-import { HAForm } from './form'
-import { HADialog } from './dialog'
-import { HAFormDialog } from './formDialog'
-import { HATree } from './tree'
+import { HaTable } from './table'
+import { HaReport } from './report'
+import { HaForm } from './form'
+import { HaDialog } from './dialog'
+import { HaFormDialog } from './formDialog'
+import { HaTree } from './tree'
 
 export function install (vue: typeof Vue, options: Object): void
 
-export class Table extends HATable {}
-export class Report extends HAReport {}
-export class Form extends HAForm {}
-export class Dialog extends HADialog {}
-export class FormDialog extends HAFormDialog {}
-export class Tree extends HATree {}
+export class Table extends HaTable {}
+export class Report extends HaReport {}
+export class Form extends HaForm {}
+export class Dialog extends HaDialog {}
+export class FormDialog extends HaFormDialog {}
+export class Tree extends HaTree {}

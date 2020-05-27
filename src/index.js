@@ -1,9 +1,9 @@
-import Table from './packages/table'
-import Report from './packages/report'
-import Dialog from './packages/dialog'
-import Form from './packages/form'
-import FormDialog from './packages/formDialog'
-import Tree from './packages/tree'
+import Table from '../packages/table'
+import Report from '../packages/report'
+import Dialog from '../packages/dialog'
+import Form from '../packages/form'
+import FormDialog from '../packages/formDialog'
+import Tree from '../packages/tree'
 
 const components = [
   Table,
