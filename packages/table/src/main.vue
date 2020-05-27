@@ -153,7 +153,7 @@ const defaultConfig = {
 }
 
 export default {
-  name: 'Hatech-element-table',
+  name: 'HatechTable',
   props: {
     data: {
       tyep: Array,
