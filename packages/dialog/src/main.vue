@@ -90,36 +90,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '../../assets/css/hatech.scss';
-
-/deep/ .el-dialog__body {
-  // max-height: 60vh;
-  // overflow: auto;
-}
-/deep/ .el-form-item__content > .el-input .el-input__inner[readonly="readonly"] {
-  background-color: #434c82;
-  border-color: #e4e7ed;
-  color: #bbb;
-  cursor: not-allowed;
-}
-.el-dialog-content-view {
-  width: 100%;
-  background-color: ha-map-get($theme-colors, dialog-bg-color);
-  /deep/ .el-select-dropdown {
-    position: absolute !important;
-    left: 0 !important;
-    top: 40px !important;
-    width: 100%;
-    .el-select-dropdown__item {
-      overflow:hidden;
-      white-space:nowrap;
-      text-overflow:ellipsis;
-    }
-  }
-}
-.el-dialog-content-form-item {
-  width: 100%;
-}
-</style>

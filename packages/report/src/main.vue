@@ -104,24 +104,22 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .table {
   width: 100%;
   table-layout: fixed;
-  tr {
-    th, td {
-      padding: 10px;
-      word-break: break-all;
-    }
-    td{
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-  .redColor {
-    color: #ff0000;
-  }
+}
+.table .tr .redColor {
+  color: #ff0000;
+}
+.table .tr .th, td {
+  padding: 10px;
+  word-break: break-all;
+}
+.table .tr .td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .text-bold {
   font-weight: 600;

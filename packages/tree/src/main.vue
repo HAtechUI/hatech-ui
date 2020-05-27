@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .span-ellipsis {
   width: 100%;
   overflow: hidden;
