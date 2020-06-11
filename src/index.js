@@ -4,14 +4,16 @@ import HatechDialog from '../packages/dialog'
 import HatechForm from '../packages/form'
 import HatechFormDialog from '../packages/formDialog'
 import HatechTree from '../packages/tree'
+import HatechPagination from '../packages/pagination'
 
 const components = [
+  HatechForm,
+  HatechTree,
   HatechTable,
   HatechReport,
   HatechDialog,
-  HatechForm,
   HatechFormDialog,
-  HatechTree
+  HatechPagination
 ]
 
 const install = function (Vue, opt = {}) {
@@ -23,10 +25,11 @@ const install = function (Vue, opt = {}) {
 export default {
   version: '0.1.0',
   install,
+  HatechForm,
+  HatechTree,
   HatechTable,
   HatechReport,
   HatechDialog,
-  HatechForm,
   HatechFormDialog,
-  HatechTree
+  HatechPagination
 }
