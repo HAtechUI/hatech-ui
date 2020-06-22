@@ -1,23 +1,24 @@
 <template>
   <el-dialog
-    :title="useConfig.title"
+    :title="config.title || defaultConfig.title"
     :visible.sync="visible"
-    :width="useConfig.width"
-    :top="useConfig.top"
-    :modal="useConfig.modal"
-    :modal-append-to-body="useConfig.modalAppEndToBody"
-    :appendToBody="useConfig.appendToBody"
-    :lockScroll="useConfig.lockScroll"
-    :customClass="useConfig.customClass"
-    :closeOnClickModal="useConfig.closeOnClickModal"
-    :closeOnPressEscape="useConfig.closeOnPressEscape"
-    :showClose="useConfig.showClose"
-    :center="useConfig.center"
-    :destoryOnClose="useConfig.destoryOnClose"
+    :width="config.width || defaultConfig.width"
+    :top="config.top || defaultConfig.top"
+    :modal="config.modal || defaultConfig.modal"
+    :modal-append-to-body="config.modalAppEndToBody || defaultConfig.modalAppEndToBody"
+    :appendToBody="typeof config.appendToBody === 'boolean' ? config.appendToBody : defaultConfig.appendToBody"
+    :lockScroll="typeof config.lockScroll === 'boolean' ? config.lockScroll : defaultConfig.lockScroll"
+    :customClass="config.customClass || defaultConfig.customClass"
+    :closeOnClickModal="typeof config.closeOnClickModal === 'boolean' ? config.closeOnClickModal : defaultConfig.closeOnClickModal"
+    :closeOnPressEscape="typeof config.closeOnPressEscape === 'boolean' ? config.closeOnPressEscape : defaultConfig.closeOnPressEscape"
+    :showClose="typeof config.showClose === 'boolean' ? config.showClose : defaultConfig.showClose"
+    :center="typeof config.center === 'boolean' ? config.center : defaultConfig.center"
+    :destoryOnClose="typeof config.destoryOnClose === 'boolean' ? config.destoryOnClose : defaultConfig.destoryOnClose"
     @open="onEvent('onOpenDialog', $event)"
     @opened="onEvent('onOpenedDialog', $event)"
     @close="onEvent('onCloseDialog', $event)"
-    @closed="onEvent('onClosedDialog', $event)">
+    @closed="onEvent('onClosedDialog', $event)"
+  >
     <div class="el-dialog-content-view" v-loading="loading" v-if="visible">
       <slot name="before-forms"></slot>
       <el-form
@@ -27,7 +28,8 @@
         :model="form.data"
         :rules="mode === 'edit' ? (form.rules || {}) : {}"
         @submit.native.prevent
-        :label-width="useConfig.labelWidth || 'auto'">
+        :label-width="config.labelWidth || 'auto'"
+      >
         <el-row :gutter="24">
           <template v-for="item in form.items">
             <el-col
@@ -41,7 +43,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                :class="item.props.showWordLimit ? 'has-right-padding el-dialog-content-form-item':'el-dialog-content-form-item'">
+                :class="item.props.showWordLimit ? 'has-right-padding el-dialog-content-form-item':'el-dialog-content-form-item'"
+              >
                 <el-input
                   :ref="item.prop"
                   :title="form.data[item.prop]"
@@ -72,7 +75,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-input
                   :type="showPwd ? 'text':'password'"
                   auto-complete="new-password"
@@ -84,8 +88,18 @@
                 <div v-else-if="mode === 'show'">
                   <span>{{showPwd ? (form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]) : '******'}}</span>
                 </div>
-                <svg-icon v-show="showPwd" icon-class="yincang" @click="changeShowPwd(item.prop)" style="marginLeft:10px"></svg-icon>
-                <svg-icon v-show="!showPwd" icon-class="xianshi" @click="changeShowPwd(item.prop)" style="marginLeft:10px"></svg-icon>
+                <svg-icon
+                  v-show="showPwd"
+                  icon-class="yincang"
+                  @click="changeShowPwd(item.prop)"
+                  style="marginLeft:10px"
+                ></svg-icon>
+                <svg-icon
+                  v-show="!showPwd"
+                  icon-class="xianshi"
+                  @click="changeShowPwd(item.prop)"
+                  style="marginLeft:10px"
+                ></svg-icon>
               </el-form-item>
               <!-- number -->
               <el-form-item
@@ -93,7 +107,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-input-number
                   :ref="item.prop"
                   v-if="mode === 'edit'"
@@ -113,7 +128,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-input
                   type="textarea"
                   v-if="mode === 'edit'"
@@ -136,7 +152,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-radio-group v-model="form.data[item.prop]" :ref="item.prop">
                   <el-radio
                     v-for="(option, index) in item.props.options"
@@ -154,20 +171,22 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-checkbox
                   v-if="item.checkAllItem"
                   :indeterminate="item.isIndeterminate"
                   v-model="item.checkAll"
-                  @change="item.props.checkAllEvent && onEvent(item.props.checkAllEvent, $event)">全选
-                </el-checkbox>
+                  @change="item.props.checkAllEvent && onEvent(item.props.checkAllEvent, $event)"
+                >全选</el-checkbox>
                 <el-checkbox-group
                   :ref="item.prop"
                   v-model="form.data[item.prop]"
                   :min="item.props.min"
                   :max="item.props.max"
                   :disalbed="mode === 'show'"
-                  @change="item.props.checkedEvent && onEvent(item.props.checkedEvent, $event)">
+                  @change="item.props.checkedEvent && onEvent(item.props.checkedEvent, $event)"
+                >
                   <el-checkbox
                     v-for="(option, index) in item.props.options"
                     :key="index"
@@ -183,7 +202,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-select
                   :ref="item.prop"
                   v-loading="!!item.props.loading"
@@ -197,7 +217,8 @@
                   :disabled="!!item.props.disabled || !!item.props.loading"
                   @change="item.props.event ? onEvent(item.props.event, $event): ()=>{}"
                   @visible-change="item.props.event && onEvent(item.props.event, $event)"
-                  :popper-append-to-body="false">
+                  :popper-append-to-body="false"
+                >
                   <el-option
                     v-for="(option, index) in (item.props.options || [])"
                     :key="index"
@@ -216,7 +237,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-date-picker
                   :ref="item.prop"
                   v-if="mode === 'edit'"
@@ -237,7 +259,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-date-picker
                   v-if="mode === 'edit'"
                   v-model="form.data[item.prop]"
@@ -273,7 +296,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <el-cascader
                   :ref="item.prop"
                   v-if="mode === 'edit'"
@@ -288,7 +312,8 @@
                   v-model="form.data[item.prop]"
                   :disabled="!!item.props.disabled || !!item.props.loading"
                   @change="item.props.event && onEvent(item.props.event, $event)"
-                  @visible-change="item.props.operateEvent && onEvent(item.props.operateEvent, $event)">
+                  @visible-change="item.props.operateEvent && onEvent(item.props.operateEvent, $event)"
+                >
                   <template slot-scope="{ node }">
                     <div class="cascader-node" :title="node.label" v-text="node.label"></div>
                   </template>
@@ -303,7 +328,8 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <div v-html="item.formatter && item.formatter(form.data, mode)" />
               </el-form-item>
               <!-- 文字展示 -->
@@ -312,18 +338,20 @@
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
-                {{item.formatter ? item.formatter(form.data, mode) : form.data[item.props && item.props.showProp ? item.props.showProp : item.prop] }}
-              </el-form-item>
+                class="el-dialog-content-form-item"
+              >{{item.formatter ? item.formatter(form.data, mode) : form.data[item.props && item.props.showProp ? item.props.showProp : item.prop] }}</el-form-item>
               <!-- 自定义插槽 -->
               <el-form-item
                 v-else-if="item.type === 'slot'"
                 :rules="item.rules"
                 :prop="item.prop"
                 :label="item.label"
-                class="el-dialog-content-form-item">
+                class="el-dialog-content-form-item"
+              >
                 <slot :name="item.props.slot" :item="item" :data="form.data" v-if="mode === 'edit'"></slot>
-                <div v-else-if="mode === 'show'">{{form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]}}</div>
+                <div
+                  v-else-if="mode === 'show'"
+                >{{form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]}}</div>
               </el-form-item>
             </el-col>
           </template>
@@ -331,18 +359,16 @@
       </el-form>
     </div>
     <slot name="custom"></slot>
-    <div slot="footer"
-          class="dialog-footer"
-          v-if="useConfig.buttons && useConfig.buttons.length > 0">
-      <template v-for="button in useConfig.buttons">
-        <el-button v-if="button.show"
-                    :key="button.event"
-                    @click="onEvent(button.event)"
-                    :type="button.type"
-                    v-stop-reclick
-                    :disabled="!!loading">
-          {{button.name}}
-        </el-button>
+    <div slot="footer" class="dialog-footer" v-if="config.buttons && config.buttons.length > 0">
+      <template v-for="button in config.buttons">
+        <el-button
+          v-if="button.show"
+          :key="button.event"
+          @click="onEvent(button.event)"
+          :type="button.type"
+          v-stop-reclick
+          :disabled="!!loading"
+        >{{button.name}}</el-button>
       </template>
     </div>
   </el-dialog>
@@ -354,30 +380,22 @@ const defaultConfig = {
   width: `${
     window.screen.width * 0.5 < 800 ? 800 : window.screen.width * 0.5
   }px`,
-  labelWidth: '20%',
+  labelWidth: "20%",
   fullscreen: true,
-  top: '10vh',
+  top: "10vh",
   modal: false,
   modalAppendToBody: true,
   appendToBody: false,
   lockScroll: true,
-  customClass: '',
+  customClass: "",
   closeOnClickModal: false,
   closeOnPressEscape: false,
   showClose: true,
   center: false,
-  destoryOnClose: true,
-  buttons: [
-    {
-      type: 'primary',
-      event: 'onOk',
-      name: '提交',
-      show: true
-    }
-  ]
+  destoryOnClose: true
 };
 export default {
-  name: 'HatechFormDialog',
+  name: "HatechFormDialog",
   props: {
     loading: {
       type: Boolean,
@@ -396,34 +414,19 @@ export default {
     },
     mode: {
       type: String,
-      default: 'edit'
+      default: "edit"
     }
   },
   data() {
     return {
       visible: false,
-      showPwd: false
+      showPwd: false,
+      defaultConfig
     };
   },
-  computed: {
-    useConfig() {
-      return {
-        ...defaultConfig,
-        ...this.config
-      };
-    }
-  },
-  watch: {
-    form: {
-      handler (n, o) {
-        console.log(n)
-      }
-    }
-  },
-  created() {},
   methods: {
     onEvent(event, params = {}) {
-      this.$emit('onEvent', {
+      this.$emit("onEvent", {
         event,
         params: {
           form: this.$refs.form,
@@ -431,34 +434,34 @@ export default {
           data: this.form.data,
           params
         }
-      })
+      });
     },
     formRef() {
-      return this.$refs.form
+      return this.$refs.form;
     },
     show() {
-      this.visible = true
+      this.visible = true;
     },
     close() {
-      this.visible = false
+      this.visible = false;
     },
     changeShowPwd(refName) {
-      this.showPwd = !this.showPwd
+      this.showPwd = !this.showPwd;
       setTimeout(() => {
-        this.changeCursorPosition(refName)
-      }, 0)
+        this.changeCursorPosition(refName);
+      }, 0);
     },
     // 光标控制
     changeCursorPosition(refName) {
-      let dom = this.$refs[refName] && this.$refs[refName][0].$refs.input
+      let dom = this.$refs[refName] && this.$refs[refName][0].$refs.input;
       // 获取光标的位置
-      let startPos = this.$utils.dom.getCursortPosition(dom)
+      let startPos = this.$utils.dom.getCursortPosition(dom);
       // 设置光标位置
-      this.$utils.dom.setCaretPosition(dom, startPos)
+      this.$utils.dom.setCaretPosition(dom, startPos);
     },
     // 过滤空格
     filterInput(data) {
-      return data.replace(/\s+/g, '')
+      return data.replace(/\s+/g, "");
     }
   }
 };

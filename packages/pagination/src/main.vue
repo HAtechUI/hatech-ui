@@ -6,18 +6,18 @@
  -->
 <template>
   <el-pagination
-    :small="useConfig.small"
-    :background="useConfig.background"
+    :small="typeof config.small === 'boolean' ? config.small : defaultConfig.small"
+    :background="typeof config.background === 'boolean' ? config.background : defaultConfig.background"
     :page-size="pageInfo.limit"
     :total="pageInfo.total"
     :current-page="pageInfo.page"
-    :pager-count="useConfig.pagerCount"
-    :layout="useConfig.layout"
-    :page-sizes="useConfig.pageSizes"
-    :prev-text="useConfig.prevText"
-    :next-text="useConfig.nextText"
-    :disabled="useConfig.disabled"
-    :hide-on-single-page="useConfig.hideOnSinglePage"
+    :pager-count="config.pagerCount || defaultConfig.pagerCount"
+    :layout="config.layout || defaultConfig.layout"
+    :page-sizes="config.pageSizes || defaultConfig.pageSizes"
+    :prev-text="config.prevText || defaultConfig.prevText"
+    :next-text="config.nextText || defaultConfig.nextText"
+    :disabled="typeof config.disabled === 'boolean' ? config.disabled : defaultConfig.disabled"
+    :hide-on-single-page="typeof config.hideOnSinglePage === 'boolean' ? config.hideOnSinglePage : defaultConfig.hideOnSinglePage"
     @size-change="onEvent('onSizeChange', $event)"
     @current-change="onEvent('onPageChange', $event)"
     @prev-click="onEvent('onPageChange', $event)"
@@ -30,10 +30,10 @@ const defaultConfig = {
   small: false,
   background: true,
   pagerCount: 9,
-  layout: 'total, sizes, prev, pager, next, jumper',
+  layout: "total, sizes, prev, pager, next, jumper",
   pageSizes: [10, 20, 50, 100, 200],
   hideOnSinglePage: false
-}
+};
 export default {
   name: "HatechPagination",
   props: {
@@ -50,26 +50,23 @@ export default {
       })
     }
   },
-  computed: {
-    useConfig() {
-      return { ...defaultConfig, ...this.config }
-    },
-    usePageInfo() {
-      return this.pageInfo
-    }
+  data() {
+    return {
+      defaultConfig
+    };
   },
   methods: {
     onEvent(event, ...avgs) {
-      const pageInfo = this[event](...avgs)
-      this.$emit('onEvent', pageInfo)
+      const pageInfo = this[event](...avgs);
+      this.$emit("onEvent", pageInfo);
     },
     onSizeChange(limit) {
-      return { ...this.pageInfo, limit }
+      return { ...this.pageInfo, limit };
     },
     onPageChange(page) {
-      return { ...this.pageInfo, page }
+      return { ...this.pageInfo, page };
     }
   }
-}
+};
 </script>
 

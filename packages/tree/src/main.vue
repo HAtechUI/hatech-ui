@@ -2,30 +2,30 @@
   <el-tree
     ref="tree"
     :data="data"
-    :empty-text="config.emptyText || localConfig.emptyText"
-    :node-key="config.nodeKey || localConfig.nodeKey"
-    :props="config.props || localConfig.props"
-    :render-after-expand="config.renderAfterExpand || localConfig.renderAfterExpand"
-    :load="config.load || localConfig.load"
-    :render-content="config.renderContent || localConfig.renderContent"
-    :highlight-current="config.highlightCurrent || localConfig.highlightCurrent"
-    :default-expand-all="config.defaultExpandAll || localConfig.defaultExpandAll"
-    :expand-on-click-node="config.expandOnClickNode || localConfig.expandOnClickNode"
-    :check-on-click-node="config.checkOnClickNode || localConfig.checkOnClickNode"
-    :auto-expand-parent="config.autoExpandParent || localConfig.autoExpandParent"
-    :default-expanded-keys="config.defaultExpandedKeys || localConfig.defaultExpandedKeys"
-    :show-checkbox="config.showCheckbox || localConfig.showCheckbox"
-    :check-strictly="config.checkStrictly || localConfig.checkStrictly"
-    :default-checked-keys="config.defaultCheckedKeys || localConfig.defaultCheckedKeys"
-    :current-node-key="config.currentNodeKey || localConfig.currentNodeKey"
-    :filter-node-method="config.filterNodeMethod || localConfig.filterNodeMethod"
-    :accordion="config.accordion || localConfig.accordion"
-    :indent="config.indent || localConfig.indent"
-    :icon-class="config.iconClass || localConfig.iconClass"
-    :lazy="config.lazy || localConfig.lazy"
-    :draggable="config.draggable || localConfig.draggable"
-    :allow-drag="config.allowDrag || localConfig.allowDrag"
-    :allow-drop="config.allowDrop || localConfig.allowDrop"
+    :empty-text="config.emptyText || defaultConfig.emptyText"
+    :node-key="config.nodeKey || defaultConfig.nodeKey"
+    :props="config.props || defaultConfig.props"
+    :render-after-expand="config.renderAfterExpand || defaultConfig.renderAfterExpand"
+    :load="config.load || defaultConfig.load"
+    :render-content="typeof config.renderContent === 'boolean' ? config.renderContent : defaultConfig.renderContent"
+    :highlight-current="typeof config.highlightCurrent === 'boolean' ? config.highlightCurrent : defaultConfig.highlightCurrent"
+    :default-expand-all="typeof config.defaultExpandAll === 'boolean' ? config.defaultExpandAll : defaultConfig.defaultExpandAll"
+    :expand-on-click-node="typeof config.expandOnClickNode === 'boolean' ? config.expandOnClickNode : defaultConfig.expandOnClickNode"
+    :check-on-click-node="typeof config.checkOnClickNode === 'boolean' ? config.checkOnClickNode : defaultConfig.checkOnClickNode"
+    :auto-expand-parent="typeof config.autoExpandParent === 'boolean' ? config.autoExpandParent : defaultConfig.autoExpandParent"
+    :default-expanded-keys="config.defaultExpandedKeys || defaultConfig.defaultExpandedKeys"
+    :show-checkbox="typeof config.showCheckbox === 'boolean' ? config.showCheckbox : defaultConfig.showCheckbox"
+    :check-strictly="typeof config.checkStrictly === 'boolean' ? config.checkStrictly : defaultConfig.checkStrictly"
+    :default-checked-keys="config.defaultCheckedKeys || defaultConfig.defaultCheckedKeys"
+    :current-node-key="config.currentNodeKey || defaultConfig.currentNodeKey"
+    :filter-node-method="config.filterNodeMethod || defaultConfig.filterNodeMethod"
+    :accordion="typeof config.accordion === 'boolean' ? config.accordion : defaultConfig.accordion"
+    :indent="config.indent || defaultConfig.indent"
+    :icon-class="config.iconClass || defaultConfig.iconClass"
+    :lazy="typeof config.lazy === 'boolean' ? config.lazy : defaultConfig.lazy"
+    :draggable="typeof config.draggable === 'boolean' ? config.draggable : defaultConfig.draggable"
+    :allow-drag="config.allowDrag || defaultConfig.allowDrag"
+    :allow-drop="config.allowDrop || defaultConfig.allowDrop"
     @node-click="onEvent('node-click', $event)"
     @node-contextmenu="onEvent('node-contextmenu', $event)"
     @check-change="onEvent('check-change', $event)"
@@ -38,15 +38,7 @@
     @node-drag-leave="onEvent('node-drag-leave', $event)"
     @node-drag-over="onEvent('node-drag-over', $event)"
     @node-drag-end="onEvent('node-drag-end', $event)"
-    @node-drop="(draggingNode, dropNode, dropType, ev) => {
-      let params = [
-        draggingNode,
-        dropNode,
-        dropType,
-        ev
-      ]
-      onEvent('node-drop', params)
-      }"
+    @node-drop="(draggingNode, dropNode, dropType, ev) => onEvent('node-drop', [ draggingNode, dropNode, dropType, ev ])"
   >
     <template slot-scope="{ node }">
       <span class="span-ellipsis" :title="node.label" v-text="node.label"></span>
@@ -56,11 +48,11 @@
 
 <script>
 const defaultConfig = {
-  emptyText: '没有数据',
-  nodeKey: 'id',
+  emptyText: "没有数据",
+  nodeKey: "id",
   props: {
-    label: 'name',
-    children: 'children',
+    label: "name",
+    children: "children",
     disabled: false,
     isLeaf: false
   },
@@ -79,10 +71,10 @@ const defaultConfig = {
   indent: 16,
   lazy: false,
   draggable: false
-}
+};
 
 export default {
-  name: 'HatechTree',
+  name: "HatechTree",
   props: {
     data: {
       type: Array,
@@ -95,25 +87,25 @@ export default {
   },
   data() {
     return {
-      localConfig: defaultConfig,
+      defaultConfig,
       tree: {}
-    }
+    };
   },
   mounted() {
-    this.tree = this.$refs.tree
+    this.tree = this.$refs.tree;
   },
   methods: {
     onEvent(event, params) {
-      this.$emit('onEvent', {
+      this.$emit("onEvent", {
         event: event,
         params,
         tree: this.$refs.tree,
-        config: { ...this.localConfig, ...this.config },
+        config: { ...this.defaultConfig, ...this.config },
         data: this.data
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

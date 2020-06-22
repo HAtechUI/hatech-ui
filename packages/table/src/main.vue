@@ -7,37 +7,37 @@
 <template>
   <!-- 列表 -->
   <el-table
-    :stripe="config.stripe || localConfig.stripe"
-    :border="config.border || localConfig.border"
-    :resizable="config.resizable || localConfig.resizable"
-    :size="config.size || localConfig.size"
-    :height="config.height || localConfig.height"
-    :maxHeight="config.maxHeight || localConfig.maxHeight"
-    :fit="config.fit || localConfig.fit"
-    :show-header="config.showHeader || localConfig.showHeader"
-    :highlight-current-row="config.highlightCurrentRow || localConfig.highlightCurrentRow"
-    :row-class-name="config.rowClassName || localConfig.rowClassName"
-    :row-style="config.rowStyle || localConfig.rowStyle"
-    :cell-class-name="config.rowClassName || localConfig.rowClassName"
-    :cell-style="config.cellStyle || localConfig.cellStyle"
-    :header-row-class-name="config.headerRowClassName || localConfig.headerRowClassName"
-    :header-row-style="config.headerRowStyle || localConfig.headerRowStyle"
-    :header-cell-class-name="config.headerCellClassName || localConfig.headerCellClassName"
-    :header-cell-style="config.headerCellStyle || localConfig.headerCellStyle"
-    :row-key="config.rowKey || localConfig.rowKey"
-    :current-row-key="config.currentRowKey || localConfig.currentRowKey"
-    :empty-text="config.emptyText || localConfig.emptyText"
-    :default-expand-all="config.defaultExpandAll || localConfig.defaultExpandAll"
-    :tooltip-effect="config.tooltipEffect || localConfig.tooltipEffect"
-    :show-summary="config.showSummary || localConfig.showSummary"
-    :sum-text="config.sumText || localConfig.sumText"
-    :summary-method="config.summaryMethod || localConfig.summaryMethod"
-    :span-method="config.spanMethod || localConfig.spanMethod"
-    :select-on-indeterminate="config.selectOnIndeterminate || localConfig.selectOnIndeterminate"
-    :indent="config.indent || localConfig.indent"
-    :lazy="config.lazy || localConfig.lazy"
-    :load="config.load || localConfig.load"
-    :tree-props="config.treeProps || localConfig.treeProps"
+    :stripe="typeof config.stripe === 'boolean' ? config.stripe : defaultConfig.stripe"
+    :border="typeof config.border === 'boolean' ? config.border : defaultConfig.border"
+    :resizable="config.resizable || defaultConfig.resizable"
+    :size="config.size || defaultConfig.size"
+    :height="config.height || defaultConfig.height"
+    :maxHeight="config.maxHeight || defaultConfig.maxHeight"
+    :fit="typeof config.fit === 'boolean' ? config.fit : defaultConfig.fit"
+    :show-header="typeof config.showHeader === 'boolean' ? config.showHeader : defaultConfig.showHeader"
+    :highlight-current-row="typeof config.highlightCurrentRow === 'boolean' ? config.highlightCurrentRow : defaultConfig.highlightCurrentRow"
+    :row-class-name="config.rowClassName || defaultConfig.rowClassName"
+    :row-style="config.rowStyle || defaultConfig.rowStyle"
+    :cell-class-name="config.rowClassName || defaultConfig.rowClassName"
+    :cell-style="config.cellStyle || defaultConfig.cellStyle"
+    :header-row-class-name="config.headerRowClassName || defaultConfig.headerRowClassName"
+    :header-row-style="config.headerRowStyle || defaultConfig.headerRowStyle"
+    :header-cell-class-name="config.headerCellClassName || defaultConfig.headerCellClassName"
+    :header-cell-style="config.headerCellStyle || defaultConfig.headerCellStyle"
+    :row-key="config.rowKey || defaultConfig.rowKey"
+    :current-row-key="config.currentRowKey || defaultConfig.currentRowKey"
+    :empty-text="config.emptyText || defaultConfig.emptyText"
+    :default-expand-all="typeof config.defaultExpandAll === 'boolean' ? config.defaultExpandAll : defaultConfig.defaultExpandAll"
+    :tooltip-effect="config.tooltipEffect || defaultConfig.tooltipEffect"
+    :show-summary="typeof config.showSummary === 'boolean' ? config.showSummary : defaultConfig.showSummary"
+    :sum-text="config.sumText || defaultConfig.sumText"
+    :summary-method="config.summaryMethod || defaultConfig.summaryMethod"
+    :span-method="config.spanMethod || defaultConfig.spanMethod"
+    :select-on-indeterminate="typeof config.selectOnIndeterminate === 'boolean' ? config.selectOnIndeterminate : defaultConfig.selectOnIndeterminate"
+    :indent="config.indent || defaultConfig.indent"
+    :lazy="typeof config.lazy === 'boolean' ? config.lazy : defaultConfig.lazy"
+    :load="config.load || defaultConfig.load"
+    :tree-props="config.treeProps || defaultConfig.treeProps"
     :data="data || []"
     ref="table"
     @select="eventEmit('select', $event)"
@@ -56,7 +56,8 @@
     @filter-change="eventEmit('filter-change', $event)"
     @current-change="eventEmit('current-change', $event)"
     @header-dragend="eventEmit('header-dragend', $event)"
-    @expand-change="eventEmit('expand-change', $event)">
+    @expand-change="eventEmit('expand-change', $event)"
+  >
     <!-- 多选 -->
     <el-table-column
       v-if="table.isSelectionShow"
@@ -67,13 +68,7 @@
     ></el-table-column>
 
     <!-- 表格编号设置 -->
-    <el-table-column
-      label="编号"
-      v-if="table.isIndexShow"
-      type="index"
-      align="center"
-      width="50"
-    ></el-table-column>
+    <el-table-column label="编号" v-if="table.isIndexShow" type="index" align="center" width="50"></el-table-column>
 
     <!-- 列配置 -->
     <el-table-column
@@ -98,7 +93,8 @@
       :selectable="column.selectable"
       :reserve-selection="column.reserveSelection"
       :filters="column.filters"
-      :filter-placement="column.filterPlacement">
+      :filter-placement="column.filterPlacement"
+    >
       <!--TODO:根据列表type展示相关内容-->
       <!-- slot，返回scope和column参数 -->
       <div class="td-cell" slot-scope="scope" v-if="column.type === 'slot'">
@@ -106,7 +102,8 @@
       </div>
       <!-- 默认 -->
       <div v-else slot-scope="scope">
-        <div class="td-cell"
+        <div
+          class="td-cell"
           v-html="column.formatter ? column.formatter(scope.row, scope.column, scope.row[column.prop], scope.$index) : scope.row[column.prop]"
         />
       </div>
@@ -118,7 +115,8 @@
       label="操作"
       align="center"
       :width="table.cellOptionsWidth"
-      min-width="80">
+      min-width="80"
+    >
       <template slot-scope="scope">
         <span
           v-for="option in (table.cellOptions || []).filter(o => o.show && (o.formatter ? o.formatter(scope.row, o) : true))"
@@ -127,9 +125,8 @@
           @click.stop="onEvent(option, scope.row)"
           class="cell-option-item"
           :title="option.name"
-          :name="option.name">
-          {{option.name}}
-        </span>
+          :name="option.name"
+        >{{option.name}}</span>
       </template>
     </el-table-column>
   </el-table>
@@ -139,21 +136,21 @@
 const defaultConfig = {
   showHeader: true,
   border: true,
-  size: 'small',
+  size: "small",
   stripe: false,
   fit: true,
   highlightCurrentRow: true,
   defaultExpandAll: false,
-  defaultSort: 'ascending',
-  tooltipEffect: 'light',
+  defaultSort: "ascending",
+  tooltipEffect: "light",
   showSummary: false,
-  sumText: '合计',
+  sumText: "合计",
   selectOnIndeterminate: true,
   indent: 16
-}
+};
 
 export default {
-  name: 'HatechTable',
+  name: "HatechTable",
   props: {
     data: {
       tyep: Array,
@@ -171,7 +168,7 @@ export default {
   data() {
     return {
       tableInstance: undefined,
-      localConfig: defaultConfig
+      defaultConfig
     };
   },
   mounted() {
@@ -180,12 +177,11 @@ export default {
   methods: {
     // 表格事件
     eventEmit(eventName, params) {
-      this.$emit('onTableEvent', { event: eventName, params });
+      this.$emit("onTableEvent", { event: eventName, params });
     },
     // 操作列业务事件
     onEvent(option, row) {
-      this.$store.commit('saveOperationId', option.id)
-      this.$emit('onEvent', { event: option.event, option, params: row });
+      this.$emit("onEvent", { event: option.event, option, params: row });
     }
   }
 };

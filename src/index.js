@@ -17,7 +17,6 @@ const components = [
 ]
 
 const install = function (Vue, opt = {}) {
-  
   components.forEach(component => Vue.component(component.name, component))
 
 }
