@@ -68,7 +68,7 @@
     ></el-table-column>
 
     <!-- 表格编号设置 -->
-    <el-table-column label="编号" v-if="table.isIndexShow" type="index" align="center" width="50"></el-table-column>
+    <el-table-column :label="table.indexLabel || '编号'" v-if="table.isIndexShow" type="index" align="center" width="50"></el-table-column>
 
     <!-- 列配置 -->
     <el-table-column
