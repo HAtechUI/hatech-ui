@@ -67,8 +67,21 @@
       width="40"
     ></el-table-column>
 
+    <!-- 单选 -->
+    <el-table-column v-if="table.isSelectionRadioShow" align="center" width="40">
+      <template scope="scope">
+        <el-radio v-model="tempRadio" @change.native="onClickRadio($scope.$index, scope.row)">&nbsp;</el-radio>
+      </template>
+    </el-table-column>
+
     <!-- 表格编号设置 -->
-    <el-table-column :label="table.indexLabel || '编号'" v-if="table.isIndexShow" type="index" align="center" width="50"></el-table-column>
+    <el-table-column
+      :label="table.indexLabel || '编号'"
+      v-if="table.isIndexShow"
+      type="index"
+      align="center"
+      width="50"
+    ></el-table-column>
 
     <!-- 列配置 -->
     <el-table-column
@@ -182,6 +195,17 @@ export default {
     // 操作列业务事件
     onEvent(option, row) {
       this.$emit("onEvent", { event: option.event, option, params: row });
+    },
+    /**
+     * 单选点击事件
+     * @param {Number} index 所点击下标
+     * @param {Object} row 点击行数据
+     */
+    onClickRadio(index, row) {
+      this.$emit("onTableEvent", {
+        event: "onSelectRadio",
+        params: { row, index }
+      });
     }
   }
 };
