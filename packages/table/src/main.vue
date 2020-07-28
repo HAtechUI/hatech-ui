@@ -70,7 +70,11 @@
     <!-- 单选 -->
     <el-table-column v-if="table.isSelectionRadioShow" align="center" width="40">
       <template scope="scope">
-        <el-radio v-model="tempRadio" @change.native="onClickRadio($scope.$index, scope.row)">&nbsp;</el-radio>
+        <el-radio
+          v-model="tempRadio"
+          :label="scope.row[table.selectionRadioKey || 'id']"
+          @change.native="onClickRadio(scope.$index, scope.row)"
+        >&nbsp;</el-radio>
       </template>
     </el-table-column>
 
@@ -108,7 +112,6 @@
       :filters="column.filters"
       :filter-placement="column.filterPlacement"
     >
-      <!--TODO:根据列表type展示相关内容-->
       <!-- slot，返回scope和column参数 -->
       <div class="td-cell" slot-scope="scope" v-if="column.type === 'slot'">
         <slot :name="'table-column-' + column.prop" :scope="scope" :column="column"></slot>
@@ -181,6 +184,7 @@ export default {
   data() {
     return {
       tableInstance: undefined,
+      tempRadio: false,
       defaultConfig
     };
   },
@@ -203,7 +207,7 @@ export default {
      */
     onClickRadio(index, row) {
       this.$emit("onTableEvent", {
-        event: "onSelectRadio",
+        event: "select-radio",
         params: { row, index }
       });
     }
