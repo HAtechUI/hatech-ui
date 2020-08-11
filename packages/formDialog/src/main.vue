@@ -89,12 +89,14 @@
                   <span>{{showPwd ? (form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]) : '******'}}</span>
                 </div>
                 <svg-icon
+                  class="pwd-icon"
                   v-show="showPwd"
                   icon-class="yincang"
                   @click="changeShowPwd(item.prop)"
                   style="marginLeft:10px"
                 ></svg-icon>
                 <svg-icon
+                  class="pwd-icon"
                   v-show="!showPwd"
                   icon-class="xianshi"
                   @click="changeShowPwd(item.prop)"
@@ -467,3 +469,10 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.pwd-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+</style>
