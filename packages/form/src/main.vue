@@ -104,7 +104,7 @@
               <el-input
                 type="textarea"
                 v-if="mode === 'edit'"
-                v-model="form.data[item.prop]"
+                v-model.trim="form.data[item.prop]"
                 :ref="item.prop"
                 :maxlength="item.props.maxlength"
                 :minlength="item.props.minlength"
