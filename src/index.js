@@ -5,6 +5,7 @@ import HatechForm from '../packages/form'
 import HatechFormDialog from '../packages/formDialog'
 import HatechTree from '../packages/tree'
 import HatechPagination from '../packages/pagination'
+import HatechLogin from '../packages/login'
 
 const components = [
   HatechForm,
@@ -13,17 +14,18 @@ const components = [
   HatechReport,
   HatechDialog,
   HatechFormDialog,
-  HatechPagination
+  HatechPagination,
+  HatechLogin
 ]
 
 const install = function (Vue, opt = {}) {
   components.forEach(component => Vue.component(component.name, component))
-
 }
 
 export default {
   version: '0.1.0',
   install,
+  HatechLogin,
   HatechForm,
   HatechTree,
   HatechTable,

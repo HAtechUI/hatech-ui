@@ -25,7 +25,7 @@
         <a href="http://www.beian.miit.gov.cn"
            rel="noopener noreferrer"
            target="_blank">京ICP 备 19017828 号</a>
-        <p>Copyright &copy; {{new Date().getFullYear()}}北京同创永益科技发展有限公司</p>
+        <p>Copyright &copy; <span v-text="year"></span>北京同创永益科技发展有限公司</p>
       </slot>
     </div>
 
@@ -33,33 +33,28 @@
 </template>
 
 <script>
-
-
+/**
+ * 登录页面组件
+ * @param {Object} config 组件配置
+ * @param {Object} config.containerStyle 组件css样式
+ * @param {Object} config.loginStyle 组件登录面板css样式
+ * @slot top-logo 左上角Logo图标插槽
+ * @slot login-form 登录输入面板插槽
+ * @slot footer 页脚插槽
+ */
 export default {
   name: 'Login',
   components: {},
-  data () {
-    return {
-
-    }
-  },
   props: {
     config: {
       type: Object,
       default: () => ({})
     }
   },
-  created () {
-
-  },
-  mounted () {
-
-  },
-  destroyed () {
-
-  },
-  methods: {
-
+  data() {
+    return {
+      year: new Date().getFullYear()
+    }
   }
 }
 </script>
@@ -67,7 +62,7 @@ export default {
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-image: url('./img/login-bg.jpg');
+  background-image: url("./img/login-bg.jpg");
   background-size: 100% 100%;
   height: 100%;
   position: relative;
