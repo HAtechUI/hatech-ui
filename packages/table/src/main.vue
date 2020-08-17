@@ -62,6 +62,7 @@
     <el-table-column
       v-if="table.isSelectionShow"
       :selectable="table.selectable"
+      :reserve-selection="table.reserveSelection"
       type="selection"
       align="center"
       width="40"
