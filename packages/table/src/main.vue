@@ -163,7 +163,8 @@ const defaultConfig = {
   showSummary: false,
   sumText: "合计",
   selectOnIndeterminate: true,
-  indent: 16
+  indent: 16,
+  rowKey: (row = {}) => row.id
 };
 
 export default {
