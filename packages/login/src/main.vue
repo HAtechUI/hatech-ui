@@ -2,7 +2,7 @@
  * @Author: liuzhihao
  * @Date: 2020-08-17 16:26:11
  * @LastEditors: liuzhihao
- * @LastEditTime: 2020-08-18 09:04:57
+ * @LastEditTime: 2020-08-18 09:08:12
  * @description: 
 -->
 <template>
@@ -43,7 +43,7 @@
  * @slot footer 页脚插槽
  */
 export default {
-  name: 'HattechLogin',
+  name: 'HatechLogin',
   components: {},
   props: {
     config: {
