@@ -2,7 +2,7 @@
  * @Author: liuzhihao
  * @Date: 2020-08-17 16:26:11
  * @LastEditors: liuzhihao
- * @LastEditTime: 2020-08-17 17:06:49
+ * @LastEditTime: 2020-08-18 09:04:57
  * @description: 
 -->
 <template>
@@ -43,7 +43,7 @@
  * @slot footer 页脚插槽
  */
 export default {
-  name: 'Login',
+  name: 'HattechLogin',
   components: {},
   props: {
     config: {
@@ -51,7 +51,7 @@ export default {
       default: () => ({})
     }
   },
-  data() {
+  data () {
     return {
       year: new Date().getFullYear()
     }
@@ -62,7 +62,7 @@ export default {
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-image: url("./img/login-bg.jpg");
+  background-image: url('./img/login-bg.jpg');
   background-size: 100% 100%;
   height: 100%;
   position: relative;
@@ -78,8 +78,10 @@ export default {
     min-width: 350px;
     height: 80%;
     position: absolute;
+    right: 0;
     left: 0;
     bottom: 0;
+    top: 0;
     margin: auto;
     justify-content: center; //子元素水平居中
     align-items: center; //子元素垂直居中
