@@ -1,0 +1,111 @@
+.login-container {
+  min-height: 100%;
+  width: 100%;
+  background-image: url('./img/login-bg.jpg');
+  background-size: 100% 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  .top {
+    height: 55px;
+    top: 50px;
+    left: 50px;
+    position: absolute;
+  }
+  .center {
+    max-width: 500px;
+    min-width: 350px;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    justify-content: center; //子元素水平居中
+    align-items: center; //子元素垂直居中
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    div.content {
+      width: 100%;
+      background: rgba(26, 47, 138, 0.6);
+      padding: 30px;
+    }
+  }
+  .footer {
+    position: absolute;
+    text-align: center;
+    color: white;
+    line-height: 40px;
+    bottom: 0;
+    left: 0;
+    a,
+    a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+#banner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#banner > #banner-text {
+  width: 100%;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  height: 180px;
+  top: 50%;
+  margin-top: -125px;
+  #en-text {
+    display: inline-block;
+  }
+  #right-text {
+    display: inline-block;
+    position: relative;
+  }
+}
+
+#banner > #banner-text > p {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#banner > #banner-text > p:nth-child(1) {
+  font-size: 2.7rem;
+  margin: 1em 0;
+}
+
+#banner > #banner-text > p:nth-child(3) {
+  position: relative;
+  width: auto;
+  font-size: 1.6rem;
+  text-align: right;
+  margin-right: 20%;
+  margin-top: 70px;
+}
+
+#banner > #banner-text > p:nth-child(3):before {
+  position: absolute;
+  content: '';
+  background: white;
+  height: 1px;
+  width: 60px;
+  margin-top: 18px;
+  margin-left: -80px;
+}
+
+#banner > #canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
