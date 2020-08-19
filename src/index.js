@@ -6,6 +6,7 @@ import HatechFormDialog from '../packages/formDialog'
 import HatechTree from '../packages/tree'
 import HatechPagination from '../packages/pagination'
 import HatechLogin from '../packages/login'
+import HatechBanner from '../packages/banner'
 
 const components = [
   HatechForm,
@@ -15,7 +16,8 @@ const components = [
   HatechDialog,
   HatechFormDialog,
   HatechPagination,
-  HatechLogin
+  HatechLogin,
+  HatechBanner
 ]
 
 const install = function (Vue, opt = {}) {
@@ -23,8 +25,9 @@ const install = function (Vue, opt = {}) {
 }
 
 export default {
-  version: '0.1.0',
+  version: '0.1.10',
   install,
+  HatechBanner,
   HatechLogin,
   HatechForm,
   HatechTree,
