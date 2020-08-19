@@ -99,7 +99,7 @@
       :minWidth="column.minWidth"
       :column-key="column.columnKey"
       :label-class-name="column.labelClassName"
-      :show-overflow-tooltip="column.showOverflowTooltip || true"
+      :show-overflow-tooltip="typeof config.showOverflowTooltip === 'boolean' ? column.showOverflowTooltip : true"
       :align="column.align || 'center'"
       :header-align="column.headerAlign || 'center'"
       :sortable="column.sortable === false ? false : true"
