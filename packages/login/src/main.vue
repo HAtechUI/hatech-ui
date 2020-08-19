@@ -2,7 +2,7 @@
  * @Author: liuzhihao
  * @Date: 2020-08-17 11:00:11
  * @LastEditors: liuzhihao
- * @LastEditTime: 2020-08-19 09:46:46
+ * @LastEditTime: 2020-08-19 16:41:20
  * @description: 
 -->
 <template>
@@ -31,10 +31,9 @@
       </div>
       <div class="footer">
         <slot name="footer">
-          <a href="http://www.beian.miit.gov.cn"
-             rel="noopener noreferrer"
-             target="_blank">京ICP 备 19017828 号</a>
-          <p>Copyright &copy; <span v-text="year"></span>北京同创永益科技发展有限公司</p>
+          <p>Copyright &copy; <span v-text="year"></span>北京同创永益科技发展有限公司 &nbsp;&nbsp; <a href="http://www.beian.miit.gov.cn"
+               rel="noopener noreferrer"
+               target="_blank">京ICP 备 19017828 号</a></p>
           <p>同创永益是面向未来的组织韧性服务提供商、专注于提供业务连续性及灾备管理相关产品、解决方案及服务的高新技术企业</p>
         </slot>
       </div>
@@ -72,12 +71,21 @@ export default {
     }
   },
   created () {
+    //判断退出到登录页面banner是否显示
+    if (sessionStorage.getItem('_quit__Show') === 'false') {
+      this.config.show = false;
+    } else {
+      this.config.show = true;
+    }
   },
   methods: {
-
+    dealBannerShow (show) {
+      sessionStorage.setItem('_quit__Show', show)
+    }
   },
   mounted () {
-
+    //banner第一渲染后 将配置中的值存储在sessionStorage中
+    this.dealBannerShow(this.config.quitShow);
   },
   destroyed () {
 
