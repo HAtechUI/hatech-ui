@@ -2,7 +2,7 @@
  * @Author: liuzhihao
  * @Date: 2020-08-18 17:35:26
  * @LastEditors: liuzhihao
- * @LastEditTime: 2020-08-19 09:47:53
+ * @LastEditTime: 2020-08-19 16:25:18
  * @description: 
 -->
 <template>
@@ -36,7 +36,9 @@ export default {
   components: {},
   data () {
     return {
-      show: this.config
+      show: this.config,
+      fn: '',
+      mouseDownFn: '',
     }
   },
   props: {
@@ -78,7 +80,7 @@ export default {
     },
   },
   mounted () {
-    if (this.config) {
+    if (this.show) {
       //画背景
       draw();
       //定位文字
