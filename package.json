@@ -1,6 +1,6 @@
 {
   "name": "hatech-ui",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "A Component library for Vue.js of Hatech",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
