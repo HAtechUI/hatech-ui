@@ -29,7 +29,7 @@
       </div>
       <div class="footer">
         <slot name="footer">
-          <p>Copyright &copy; <span v-text="year"></span>北京同创永益科技发展有限公司 &nbsp;&nbsp; <a href="http://www.beian.miit.gov.cn"
+          <p>Copyright &copy; <span v-text="year"></span> 北京同创永益科技发展有限公司 &nbsp;&nbsp; <a href="http://www.beian.miit.gov.cn"
                rel="noopener noreferrer"
                target="_blank">京ICP 备 19017828 号</a></p>
           <p>同创永益是面向未来的组织韧性服务提供商，专注于提供业务连续性及灾备管理相关产品，解决方案及服务的高新技术企业</p>
