@@ -15,12 +15,10 @@
       <template v-slot:p3
                 v-if="config.textObj&&config.textObj.p3">{{config.textObj.p3}}</template>
     </hatech-banner>
-    <div class="login-container"
-         :style="config.containerStyle">
+    <div class="login-container" :style="config.containerStyle">
       <div class="top">
         <slot name="top-logo">
-          <img src="./img/login-top-logo.png"
-               alt="">
+          <img src="./img/login-top-logo.png" alt="">
         </slot>
       </div>
       <div class="center">
@@ -34,7 +32,7 @@
           <p>Copyright &copy; <span v-text="year"></span>北京同创永益科技发展有限公司 &nbsp;&nbsp; <a href="http://www.beian.miit.gov.cn"
                rel="noopener noreferrer"
                target="_blank">京ICP 备 19017828 号</a></p>
-          <p>同创永益是面向未来的组织韧性服务提供商、专注于提供业务连续性及灾备管理相关产品、解决方案及服务的高新技术企业</p>
+          <p>同创永益是面向未来的组织韧性服务提供商，专注于提供业务连续性及灾备管理相关产品，解决方案及服务的高新技术企业</p>
         </slot>
       </div>
     </div>
@@ -93,5 +91,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import './css/style.scss';
+@import "./css/style.scss";
 </style>

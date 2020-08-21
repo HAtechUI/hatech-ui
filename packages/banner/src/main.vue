@@ -149,7 +149,7 @@ export default {
 
 #banner > #banner-text > p:nth-child(3):before {
   position: absolute;
-  content: '';
+  content: "";
   background: white;
   height: 1px;
   width: 60px;
