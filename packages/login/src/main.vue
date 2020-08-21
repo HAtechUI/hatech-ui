@@ -2,7 +2,7 @@
  * @Author: liuzhihao
  * @Date: 2020-08-17 11:00:11
  * @LastEditors: liuzhihao
- * @LastEditTime: 2020-08-19 16:41:20
+ * @LastEditTime: 2020-08-20 18:45:32
  * @description: 
 -->
 <template>
@@ -73,7 +73,7 @@ export default {
     if (sessionStorage.getItem('_quit__Show') === 'false') {
       this.config.show = false;
     } else {
-      this.config.show = true;
+      this.config.show ? this.config.show = true : this.config.show = false;
     }
   },
   methods: {
