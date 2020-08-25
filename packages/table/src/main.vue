@@ -70,7 +70,7 @@
 
     <!-- 单选 -->
     <el-table-column v-if="table.isSelectionRadioShow" align="center" width="40">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-radio
           v-model="tempRadio"
           :label="scope.row[table.selectionRadioKey || 'id']"
