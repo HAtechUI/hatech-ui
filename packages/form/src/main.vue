@@ -34,6 +34,7 @@
                 :ref="item.prop"
                 :type="item.props.type || 'text'"
                 v-if="mode === 'edit'"
+                :clearable="item.prop.clearable || true"
                 @input="e => form.data[item.prop] = filterInput(e)"
                 v-model.trim="form.data[item.prop]"
                 :maxlength="item.props.maxlength"
@@ -66,6 +67,7 @@
                 v-if="mode === 'edit'"
                 v-model.trim="form.data[item.prop]"
                 :placeholder="item.props.placeholder"
+                :clearable="item.prop.clearable || true"
               ></el-input>
               <div v-else-if="mode === 'show'">
                 <span>{{showPwd ? (form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]) : '******'}}</span>
@@ -88,6 +90,7 @@
                 :min="item.props.min"
                 :placeholder="item.props.placeholder"
                 :disabled="item.props.disabled"
+                :clearable="item.prop.clearable || true"
               ></el-input-number>
               <div
                 v-else-if="mode === 'show'"
