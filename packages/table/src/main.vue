@@ -2,7 +2,7 @@
  * @Author: Wuhao
  * @Email: kiwh77@126.com
  * @Date: 2019-09-24 09:23:20
- * @LastEditTime: 2020-05-18 14:43:30
+ * @LastEditTime: 2020-09-14 22:27:54
  -->
 <template>
   <!-- 列表 -->
@@ -65,11 +65,11 @@
       :reserve-selection="table.reserveSelection"
       type="selection"
       align="center"
-      width="40"
+      width="50"
     ></el-table-column>
 
     <!-- 单选 -->
-    <el-table-column v-if="table.isSelectionRadioShow" align="center" width="40">
+    <el-table-column v-if="table.isSelectionRadioShow" align="center" width="50">
       <template slot-scope="scope">
         <el-radio
           v-model="tempRadio"
