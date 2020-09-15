@@ -2,7 +2,7 @@
  * @Author: Wuhao
  * @Email: kiwh77@126.com
  * @Date: 2019-09-24 09:23:20
- * @LastEditTime: 2020-09-14 22:27:54
+ * @LastEditTime: 2020-09-15 12:19:41
  -->
 <template>
   <!-- 列表 -->
@@ -65,17 +65,17 @@
       :reserve-selection="table.reserveSelection"
       type="selection"
       align="center"
-      width="50"
+      width="40"
     ></el-table-column>
 
     <!-- 单选 -->
-    <el-table-column v-if="table.isSelectionRadioShow" align="center" width="50">
+    <el-table-column v-if="table.isSelectionRadioShow" align="center" width="40">
       <template slot-scope="scope">
         <el-radio
           v-model="tempRadio"
           :label="scope.row[table.selectionRadioKey || 'id']"
           @change.native="onClickRadio(scope.$index, scope.row)"
-        >&nbsp;</el-radio>
+        ></el-radio>
       </template>
     </el-table-column>
 
