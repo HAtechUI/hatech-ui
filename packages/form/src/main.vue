@@ -71,7 +71,7 @@
               ></el-input>
               <div v-else-if="mode === 'show'">
                 <span>{{showPwd ? (form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]) : '******'}}</span>
-                <i class="el-icon-view" @click="showPwd = !showPwd" style="marginLeft:10px"></i>
+                <em class="el-icon-view" @click="showPwd = !showPwd" style="marginLeft:10px"></em>
               </div>
             </el-form-item>
             <!-- number -->
