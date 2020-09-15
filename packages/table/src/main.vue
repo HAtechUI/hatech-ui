@@ -2,7 +2,7 @@
  * @Author: Wuhao
  * @Email: kiwh77@126.com
  * @Date: 2019-09-24 09:23:20
- * @LastEditTime: 2020-09-15 13:02:48
+ * @LastEditTime: 2020-09-15 13:47:35
  -->
 <template>
   <!-- 列表 -->
@@ -75,7 +75,7 @@
           v-model="tempRadio"
           :label="scope.row[table.selectionRadioKey || 'id']"
           @change.native="onClickRadio(scope.$index, scope.row)"
-        ></el-radio>
+        >&nbsp;&nbsp;&nbsp;</el-radio>
       </template>
     </el-table-column>
 
