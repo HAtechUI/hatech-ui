@@ -354,6 +354,9 @@
                 class="el-dialog-content-form-item"
               >
                 <slot :name="item.props.slot" :item="item" :data="form.data" v-if="mode === 'edit'"></slot>
+                 <div
+                  v-else-if="mode === 'show' && item.props.isee === 'see'"
+                ><slot :name="item.props.slot" :item="item" :data="form.data"></slot></div>
                 <div
                   v-else-if="mode === 'show'"
                 >{{form.data[item.props && item.props.showProp ? item.props.showProp : item.prop]}}</div>
